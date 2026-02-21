@@ -5,9 +5,15 @@
 
   <x-card class="space-y-4">
     <div class="flex justify-between">
-      <x-button.link secondary :href="route('email-list.index')">
-        {{ __('Back to lists') }}
-      </x-button.link>
+      <div class="flex space-x-4">
+        <x-button.link secondary :href="route('email-list.index')">
+          {{ __('Back to lists') }}
+        </x-button.link>
+
+        <x-button.link :href="route('subscribers.create', $emailList)">
+          {{ __('Add a new subscriber') }}
+        </x-button.link>
+      </div>
 
       <x-form :action="route('subscribers.index', $emailList)" class="w-3/5 flex space-x-4 items-center" x-data
         x-ref="form" flat>

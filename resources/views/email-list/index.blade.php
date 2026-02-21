@@ -15,13 +15,18 @@
       </x-form>
     </div>
 
-    <x-table :headers="['#', __('Email List'), __('Number of Subscribers')]">
+    <x-table :headers="['#', __('Email List'), __('Number of Subscribers'), __('Actions')]">
       <x-slot name="body">
         @foreach ($emailLists as $list)
         <tr>
           <x-table.td>{{ $list->id }}</x-table.td>
           <x-table.td>{{ $list->title }}</x-table.td>
           <x-table.td>{{ $list->subscribers_count }}</x-table.td>
+          <x-table.td>
+            <x-button.link :href="route('subscribers.index', $list)">
+              {{ __('View') }}
+            </x-button.link>
+          </x-table.td>
         </tr>
         @endforeach
       </x-slot>

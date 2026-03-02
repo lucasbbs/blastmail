@@ -972,7 +972,7 @@
             "version": "v1.0.5",
             "source": {
                 "type": "git",
-                "url": "https://github.com/guzzle/uri-template.git",
+                "url": "https://github.com/guzzle/uri-templates.git",
                 "reference": "4f4bbd4e7172148801e76e3decc1e559bdee34e1"
             },
             "dist": {
@@ -7841,7 +7841,7 @@
             "version": "5.0.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/sebastianbergmann/php-text-template.git",
+                "url": "https://github.com/sebastianbergmann/php-text-templates.git",
                 "reference": "e1367a453f0eda562eedb4f659e13aa900d66c53"
             },
             "dist": {

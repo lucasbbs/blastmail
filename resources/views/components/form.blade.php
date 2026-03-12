@@ -2,11 +2,12 @@
 'post' => null,
 'delete' => null,
 'put' => null,
+'patch' => null,
 'flat' => false
 ])
 
 @php
-$method = ($post or $put or $delete) ? 'POST' : 'GET';
+$method = ($post or $put or $delete or $patch) ? 'POST' : 'GET';
 @endphp
 
 <form {{ $attributes->class(['flex flex-col gap-4' => ! $flat]) }} method="{{ $method }}">
@@ -18,6 +19,9 @@ $method = ($post or $put or $delete) ? 'POST' : 'GET';
   @method('PUT')
   @endif
 
+  @if ($patch)
+  @method('PATCH')
+  @endif
 
   @if ($delete)
   @method('DELETE')

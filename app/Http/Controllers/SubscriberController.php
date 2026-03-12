@@ -15,30 +15,20 @@ class SubscriberController extends Controller
 
     $showTrash = request()->get('showTrash', false);
 
-    $subscribers = $emailList
-      ->subscribers()
-      ->when(
-        $showTrash,
-        fn(Builder $query) => $query->withTrashed()
-      )
-      ->when(
-        $search,
-        fn(Builder $query) => $query
-          ->where('name', 'like', "%$search%")
-          ->orWhere('email', 'like', "%$search%")
-          ->orWhere('id', '=', $search)
-      )
-      ->paginate()
-      ->appends(compact('search', 'showTrash'));
-
     return view('subscribers.index', [
       'emailList' => $emailList,
-      'subscribers' => $subscribers,
+      'subscribers' => $emailList
+        ->subscribers()
+        ->when($showTrash, fn(Builder $query) => $query->withTrashed())
+        ->when($search, fn(Builder $query) => $query->where('name', 'like', "%$search%")
+          ->orWhere('email', 'like', "%$search%")
+          ->orWhere('like', '=', "$search"))
+        ->paginate()
+        ->appends(compact('search', 'withTrashed')),
       'search' => $search,
-      'showTrash' => $showTrash,
+      'showTrash' => $showTrash
     ]);
   }
-
   public function create(EmailList $emailList)
   {
     return view('subscribers.create', compact('emailList'));

@@ -29,4 +29,18 @@ class CampaignController extends Controller
   {
     return view('campaigns.create');
   }
+
+  public function destroy(Campaign $campaign)
+  {
+    $campaign->delete();
+
+    return back()->with('message', __('Campaign successfully deleted!'));
+  }
+
+  public function restore(Campaign $campaign)
+  {
+    $campaign->restore();
+
+    return back()->with('message', __('Campaign successfully restored!'));
+  }
 }

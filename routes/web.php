@@ -35,6 +35,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('campaigns', CampaignController::class)->only(['index', 'destroy']);
     Route::get('campaigns/create/{tab?}', [CampaignController::class, 'create'])->name('campaigns.create');
     Route::patch('/campaigns/{campaign}/restore', [CampaignController::class, 'restore'])->withTrashed()->name('campaigns.restore');
+    Route::post('campaigns/create/{tab?}', [CampaignController::class, 'store']);
 });
 
 

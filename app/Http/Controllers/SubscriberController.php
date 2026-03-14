@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\EmailList;
 use App\Models\Subscriber;
-use Illuminate\Contracts\Database\Eloquent\Builder;
+// use Illuminate\Contracts\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Validation\Rule;
 
 class SubscriberController extends Controller
@@ -13,20 +14,20 @@ class SubscriberController extends Controller
   {
     $search = request()->search;
 
-    $showTrash = request()->get('showTrash', false);
+    $withTrashed = request()->get('withTrashed', false);
 
     return view('subscribers.index', [
       'emailList' => $emailList,
       'subscribers' => $emailList
         ->subscribers()
-        ->when($showTrash, fn(Builder $query) => $query->withTrashed())
+        ->when($withTrashed, fn(Builder $query) => $query->withTrashed())
         ->when($search, fn(Builder $query) => $query->where('name', 'like', "%$search%")
           ->orWhere('email', 'like', "%$search%")
           ->orWhere('like', '=', "$search"))
         ->paginate()
-        ->appends(compact('search', 'showTrash')),
+        ->appends(compact('search', 'withTrashed')),
       'search' => $search,
-      'showTrash' => $showTrash
+      'withTrashed' => $withTrashed
     ]);
   }
   public function create(EmailList $emailList)

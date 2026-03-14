@@ -54,7 +54,8 @@ class CampaignController extends Controller
             'body' => null,
             'track_click' => null,
             'track_open' => null,
-            'send_at' => null
+            'send_at' => null,
+            'send_when' => 'now',
           ])
         ]
       )

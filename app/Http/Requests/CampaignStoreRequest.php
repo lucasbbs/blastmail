@@ -33,8 +33,9 @@ class CampaignStoreRequest extends FormRequest
       'body' => null,
       'track_click' => null,
       'track_open' => null,
-      'send_at' => null
-    ], request()->all());
+      'send_at' => null,
+      'send_when' => null,
+    ], $this->all());
 
     if (blank($tab)) {
       $rules = [

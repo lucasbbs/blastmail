@@ -10,10 +10,7 @@ use App\Mail\EmailCampaign;
 use App\Models\Campaign;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Route;
-
-Route::view('/', 'welcome');
 
 Route::get('/', function () {
     Auth::loginUsingId(1);
@@ -36,23 +33,16 @@ Route::middleware('auth')->group(function () {
     Route::delete('/email-list/{emailList}/subscribers/{subscriber}', [SubscriberController::class, 'destroy'])->name('subscribers.destroy');
 
     Route::resource('templates', TemplateController::class);
-    Route::resource('campaigns', CampaignController::class)->only(['index', 'destroy']);
+    Route::get('/campaigns', [CampaignController::class, 'index'])->name('campaigns.index');
 
-    Route::get('campaigns/create/{tab?}', [CampaignController::class, 'create'])
-        ->middleware(CampaignCreateSessionControl::class)
-        ->name('campaigns.create');
-    Route::post('campaigns/create/{tab?}', [CampaignController::class, 'store']);
+    Route::get('/campaigns/{campaign}/{what}', [CampaignController::class, 'show'])->name('campaigns.show');
+
+    Route::get('/campaigns/create/{tab?}', [CampaignController::class, 'create'])->middleware(CampaignCreateSessionControl::class)->name('campaigns.create');
+    Route::post('/campaigns/create/{tab?}', [CampaignController::class, 'store']);
+
     Route::patch('/campaigns/{campaign}/restore', [CampaignController::class, 'restore'])->withTrashed()->name('campaigns.restore');
-    Route::post('campaigns/create/{tab?}', [CampaignController::class, 'store']);
-    Route::get('/campaigns/{campaign}/emails', function (Campaign $campaign) {
-
-        foreach ($campaign->emailList->subscribers as $subscriber) {
-            Mail::to($subscriber->email)
-                ->later($campaign->send_at, new EmailCampaign($campaign));
-        }
-
-        return (new EmailCampaign($campaign))->render();
-    });
+    Route::delete('/campaigns/{campaign}', [CampaignController::class, 'destroy'])->name('campaigns.destroy');
+    //endregion
 });
 
 require __DIR__ . '/auth.php';

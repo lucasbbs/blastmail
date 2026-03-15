@@ -7,27 +7,34 @@ use App\Http\Controllers\SubscriberController;
 use App\Http\Controllers\TemplateController;
 use App\Http\Controllers\TrackingController;
 use App\Http\Middleware\CampaignCreateSessionControl;
-use App\Jobs\SendEmailsCampaignJob;
 use App\Mail\EmailCampaign;
 use App\Models\Campaign;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 
 
 Route::get('/email', function () {
-    $campaign = Campaign::find(15);
+    $campaign = Campaign::find(18);
 
     $mail = $campaign->mails()->first();
 
-    $email = new EmailCampaign($campaign, $mail);
+    $pattern = '/href="([^"]*)"/';
 
-    SendEmailsCampaignJob::dispatchAfterResponse($campaign);
+    preg_match_all($pattern, $campaign->body, $matches);
+
+    foreach ($matches[1] as $index => $oldValue) {
+        $newValue = 'href="' . route('tracking.clicks', ['mail' => $mail, 'f' => $oldValue]) . '"';
+
+        $campaign->body = str_replace($matches[0][$index], $newValue, $campaign->body);
+    }
+
+    $email = new EmailCampaign($campaign, $mail);
 
     return $email->render();
 });
 
 Route::get('/t/{mail}/o', [TrackingController::class, 'openings'])->name('tracking.openings');
+Route::get('/t/{mail}/c', [TrackingController::class, 'clicks'])->name('tracking.clicks');
 
 Route::get('/', function () {
     Auth::loginUsingId(1);

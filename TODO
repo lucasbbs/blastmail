@@ -5,9 +5,9 @@ Todo:
     ✔ clicados: /campaigns/{campaign}/clicked @done(26-03-15 15:20)
   Layouts:
     ✔ show.blade @done(26-03-15 16:16)
-    ☐ tela de estatísticas
-    ☐ tela de aberto
-    ☐ tela de clicados
+    ✔ tela de estatísticas @done(26-03-15 16:56)
+    ✔ tela de aberto @done(26-03-15 16:56)
+    ✔ tela de clicados @done(26-03-15 16:56)
   Backend:
     ☐ Model
     ☐ Migration

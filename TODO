@@ -1,9 +1,10 @@
 Todo:
   Rotas:
-    ✔ estatísticas: /campaigns/{campaign}/statistics @done(25-11-03 12:17)
-    ✔ aberto: /campaigns/{campaign}/open @done(25-11-03 12:17)
-    ✔ clicados: /campaigns/{campaign}/clicked @done(25-11-03 12:17)
+    ✔ estatísticas: /campaigns/{campaign}/statistics @done(26-03-15 15:20)
+    ✔ aberto: /campaigns/{campaign}/open @done(26-03-15 15:20)
+    ✔ clicados: /campaigns/{campaign}/clicked @done(26-03-15 15:20)
   Layouts:
+    ✔ show.blade @done(26-03-15 16:16)
     ☐ tela de estatísticas
     ☐ tela de aberto
     ☐ tela de clicados

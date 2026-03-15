@@ -4,6 +4,7 @@
 'info' => null,
 'warning' => null,
 'danger' => null,
+'no-icon' => false,
 ])
 
 <div
@@ -19,6 +20,7 @@
     'bg-amber-500/10' => $warning,
     'bg-red-500/10' => $danger,
     ])>
+    @unless($noIcon)
     <div @class([ 'rounded-full p-1' , 'text-green-500 bg-green-500/15'=> $success,
       'text-sky-500 bg-sky-500/15' => $info,
       'text-amber-500 bg-sky-500/15' => $warning,
@@ -30,6 +32,7 @@
           clip-rule="evenodd" />
       </svg>
     </div>
+    @endunless
     <div class="ml-2">
       <h3 @class([ 'text-sm font-semibold' , 'text-green-500'=> $success,
         'text-sky-500' => $info,

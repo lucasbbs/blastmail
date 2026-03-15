@@ -22,7 +22,7 @@ class SendEmailsCampaign implements ShouldQueue
   public function handle(): void
   {
     foreach ($this->campaign->emailList->subscribers as $subscriber) {
-      SendEmailCampaignJob::dispatch($this->campaign, $subscriber);
+      SendEmailsCampaignJob::dispatch($this->campaign, $subscriber);
     }
   }
 }

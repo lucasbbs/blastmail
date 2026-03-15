@@ -10,7 +10,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Queue\Queueable;
 use Illuminate\Support\Facades\Mail;
 
-class SendEmailCampaignJob implements ShouldQueue
+class SendEmailsCampaignJob implements ShouldQueue
 {
   use Queueable;
 
@@ -29,7 +29,7 @@ class SendEmailCampaignJob implements ShouldQueue
    */
   public function handle(): void
   {
-    CampaignMail::query()
+    $mail = CampaignMail::query()
       ->create([
         'campaign_id' => $this->campaign->id,
         'subscriber_id' => $this->subscriber->id,
@@ -37,6 +37,6 @@ class SendEmailCampaignJob implements ShouldQueue
       ]);
 
     Mail::to($this->subscriber->email)
-      ->later($this->campaign->send_at, new EmailCampaign($this->campaign));
+      ->later($this->campaign->send_at, new EmailCampaign($this->campaign, $mail));
   }
 }

@@ -6,7 +6,7 @@
   <div class="flex gap-2 overflow-x-auto border-b border-slate-300  dark:border-slate-700">
     @foreach ($tabs as $title => $route)
     @php
-    $selected = request()->getUri() == $route;
+    $selected = str(request()->getUri())->contains($route);
     @endphp
 
     <a href="{{ $route }}" @class([ 'h-min px-4 py-2 text-sm'

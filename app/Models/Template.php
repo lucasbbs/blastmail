@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Template extends Model
 {
-  /** @use HasFactory<\Database\Factories\TemplateFactory> */
-  use HasFactory;
-  use SoftDeletes;
+    /** @use HasFactory<\Database\Factories\TemplateFactory> */
+    use HasFactory;
+    use SoftDeletes;
 }

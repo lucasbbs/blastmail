@@ -9,12 +9,12 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Subscriber extends Model
 {
-  /** @use HasFactory<\Database\Factories\SubscriberFactory> */
-  use HasFactory;
-  use SoftDeletes;
+    /** @use HasFactory<\Database\Factories\SubscriberFactory> */
+    use HasFactory;
+    use SoftDeletes;
 
-  public function emailList(): BelongsTo
-  {
-    return $this->belongsTo(EmailList::class);
-  }
+    public function emailList(): BelongsTo
+    {
+        return $this->belongsTo(EmailList::class);
+    }
 }

@@ -8,24 +8,24 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Campaign extends Model
 {
-  /** @use HasFactory<\Database\Factories\CampaignFactory> */
-  use HasFactory;
-  use SoftDeletes;
+    /** @use HasFactory<\Database\Factories\CampaignFactory> */
+    use HasFactory;
+    use SoftDeletes;
 
-  protected function casts()
-  {
-    return [
-      'send_at' => 'datetime',
-    ];
-  }
+    protected function casts()
+    {
+        return [
+            'send_at' => 'datetime',
+        ];
+    }
 
-  public function emailList()
-  {
-    return $this->belongsTo(EmailList::class);
-  }
+    public function emailList()
+    {
+        return $this->belongsTo(EmailList::class);
+    }
 
-  public function mails()
-  {
-    return $this->hasMany(CampaignMail::class);
-  }
+    public function mails()
+    {
+        return $this->hasMany(CampaignMail::class);
+    }
 }

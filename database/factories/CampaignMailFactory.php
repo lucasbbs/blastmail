@@ -11,19 +11,19 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  */
 class CampaignMailFactory extends Factory
 {
-  /**
-   * Define the model's default state.
-   *
-   * @return array<string, mixed>
-   */
-  public function definition(): array
-  {
-    return [
-      'campaign_id' => Campaign::factory(),
-      'subscriber_id' => Subscriber::factory(),
-      'sent_at' => fake()->datetime(),
-      'openings' => fake()->numberBetween(0, 10),
-      'clicks' => fake()->numberBetween(0, 10),
-    ];
-  }
+    /**
+     * Define the model's default state.
+     *
+     * @return array<string, mixed>
+     */
+    public function definition(): array
+    {
+        return [
+            'campaign_id' => Campaign::factory(),
+            'subscriber_id' => Subscriber::factory(),
+            'send_at' => fake()->dateTime,
+            'clicks' => fake()->numberBetween(0, 10),
+            'openings' => fake()->numberBetween(0, 10),
+        ];
+    }
 }

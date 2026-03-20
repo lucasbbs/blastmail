@@ -1,20 +1,19 @@
 @props([
-'headers',
-'body'
+    'headers',
+    'body'
 ])
 
-<div class="overflow-hidden w-full overflow-x-auto rounded-radius border border-outline dark:border-outline-dark">
-  <table class="w-full text-left text-sm text-on-surface dark:text-on-surface-dark">
-    <thead
-      class="border-b border-outline bg-surface-alt text-sm text-on-surface-strong dark:border-outline-dark dark:bg-surface-dark-alt dark:text-on-surface-dark-strong">
-      <tr>
-        @foreach($headers as $header)
-        <th scope="col" class="p-4 whitespace-nowrap">{{ $header }}</th>
-        @endforeach
-      </tr>
-    </thead>
-    <tbody class="divide-y divide-outline dark:divide-outline-dark">
-      {{ $body }}
-    </tbody>
-  </table>
+<div class="overflow-hidden w-full overflow-x-auto rounded-md border border-neutral-300 dark:border-neutral-700">
+    <table class="w-full text-left text-sm text-neutral-600 dark:text-neutral-300">
+        <thead class="border-b border-neutral-300 bg-neutral-50 text-sm text-neutral-900 dark:border-neutral-700 dark:bg-neutral-900 dark:text-white">
+            <tr>
+                @foreach ($headers as $header)
+                    <th scope="col" class="p-4 whitespace-nowrap">{{ $header }}</th>
+                @endforeach
+            </tr>
+        </thead>
+        <tbody class="divide-y divide-neutral-300 dark:divide-neutral-700">
+            {{ $body }}
+        </tbody>
+    </table>
 </div>

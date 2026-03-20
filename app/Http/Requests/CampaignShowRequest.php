@@ -3,29 +3,24 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Http\Exceptions\HttpResponseException;
 
 class CampaignShowRequest extends FormRequest
 {
-  /**
-   * Determine if the user is authorized to make this request.
-   */
-  public function checkWhat()
-  {
-    if (is_null($this->route('what'))) {
-      return to_route('campaigns.show', ['campaign' => $this->route('campaign'), 'what' => 'statistics']);
+    public function checkWhat()
+    {
+        if (is_null($this->route('what'))) {
+            return to_route('campaign.show', ['campaign' => $this->route('campaign'), 'what' => 'statistics']);
+        }
     }
+    /**
+     * Determine if the user is authorized to make this request.
+     */
+    public function authorize(): bool
+    {
+        $what = $this->route('what') ?: 'statistics';
 
-    return;
-  }
+        abort_unless(in_array($what, ['statistics', 'open', 'clicked']), 404);
 
-  public function authorize(): bool
-  {
-    $what = $this->route('what') ?: 'statistics';
-
-
-    abort_unless(in_array($what, ['statistics', 'open', 'clicked']), 404);
-
-    return true;
-  }
+        return true;
+    }
 }

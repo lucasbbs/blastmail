@@ -6,12 +6,9 @@ use App\Http\Requests\CampaignShowRequest;
 use App\Models\Campaign;
 use App\Models\Template;
 use App\Models\EmailList;
-use App\Mail\EmailCampaign;
-use Illuminate\Support\Facades\Mail;
 use Illuminate\Database\Eloquent\Builder;
 use App\Http\Requests\CampaignStoreRequest;
 use App\Jobs\SendEmailCampaign;
-use App\Models\CampaignMail;
 use Illuminate\Support\Traits\Conditionable;
 
 class CampaignController extends Controller

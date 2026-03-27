@@ -1,5 +1,13 @@
 <?php
 
-test('that true is true', function () {
-    expect(true)->toBeTrue();
-});
+namespace Tests\Feature;
+
+use Tests\TestCase;
+
+class ExampleTest extends TestCase
+{
+    public function test_example()
+    {
+        $this->assertTrue(true);
+    }
+}

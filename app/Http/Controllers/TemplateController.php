@@ -80,8 +80,8 @@ class TemplateController extends Controller
         $template->fill($data);
         $template->save();
 
-        return back()
-            ->with('message', __('Template successfully updaded!'));
+        return to_route('template.index')
+            ->with('message', __('Template successfully updated!'));
     }
 
     /**

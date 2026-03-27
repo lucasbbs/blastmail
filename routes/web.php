@@ -13,7 +13,7 @@ use App\Http\Controllers\TrackingController;
 use App\Http\Middleware\CampaignCreateSessionControl;
 use App\Jobs\SendEmailCampaign;
 
-Route::redirect('/dashboard', 'dashboard')->middleware(['auth', 'verified'])->name('dashboard');
+Route::redirect('/dashboard', '/')->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::get('/t/{mail}/o', [TrackingController::class, 'openings'])->name('tracking.openings');
 Route::get('/t/{mail}/c', [TrackingController::class, 'clicks'])->name('tracking.clicks');
@@ -30,6 +30,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/email-list/{emailList}/subscribers/create', [SubscriberController::class, 'create'])->name('subscribers.create');
     Route::post('/email-list/{emailList}/subscribers/create', [SubscriberController::class, 'store']);
     Route::delete('/email-list/{emailList}/subscribers/{subscriber}', [SubscriberController::class, 'destroy'])->name('subscribers.destroy');
+    Route::delete('/email-list/{emailList}', [EmailListController::class, 'destroy'])->name('email-list.delete');
 
     Route::resource('template', TemplateController::class);
 
